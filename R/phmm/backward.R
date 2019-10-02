@@ -40,16 +40,17 @@ Backward <- function(O, params, E) {
       if ((i != U) && (j != V)) {
         b.M[i, j] <- (m.m) * p.xy[O1[i+1], O2[j+1]] * b.M[i+1, j+1] + delta * (q.x[1, O1[i+1]] * b.X[i+1, j] + q.y[1, O2[j+1]] * b.Y[i, j+1])
         b.X[i, j] <- (xy.m) * p.xy[O1[i+1], O2[j+1]] * b.M[i+1, j+1] + epsilon * q.x[1, O1[i+1]] * b.X[i+1, j] + lambda * q.y[1, O2[j+1]] * b.Y[i, j+1]
-        b.Y[i, j] <- (xy.m) * p.xy[O1[i+1], O2[j+1]] * b.M[i+1, j+1] + lambda * q.x[1, O1[i+1]] * b.X[i+1, j] + epsilon * q.y[1, O2[j+1]] * b.Y[i, j+1]
+        b.Y[i, j] <- (xy.m) * p.xy[O1[i+1], O2[j+1]] * b.M[i+1, j+1] + epsilon * q.y[1, O2[j+1]] * b.Y[i, j+1] + lambda * q.x[1, O1[i+1]] * b.X[i+1, j]
       }
     }
   }
   
   # Termination
-  # Po <- (1-2*delta-tau.M) * b.M[1, 1] + delta * (b.X[1, 1] + b.Y[1, 1])
+  Po <- (1-2*delta-tau.M) * b.M[2, 2] + delta * (b.X[2, 2] + b.Y[2, 2])
   
   b.val <- list(b.M, b.X, b.Y)
   names(b.val) <- c(S)
   
-  return(b.val)
+  return(Po)
+  #return(b.val)
 }
