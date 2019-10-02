@@ -96,8 +96,8 @@ for (i in 1:len) {
 O1 <- append(wl.o[[1]], NA)
 O2 <- append(wl.o[[2]], NA)
 
-U <- length(O1) - 2
-V <- length(O2) - 2
+U <- length(O1) - 1
+V <- length(O2) - 1
 
 O <- list(O1, O2, U, V)
 names(O) <- c("O1", "O2", "U", "V")

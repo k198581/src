@@ -26,9 +26,9 @@ Forward <- function(O, params, E) {
   xy.m <- 1-epsilon-lambda-tau.XY
   
   # Initialization
-  f.M <- matrix(0, U+2, V+2)
-  f.X <- matrix(0, U+2, V+2)
-  f.Y <- matrix(0, U+2, V+2)
+  f.M <- matrix(0, U+1, V+1)
+  f.X <- matrix(0, U+1, V+1)
+  f.Y <- matrix(0, U+1, V+1)
   
   f.M[2, 2] <- m.m
   f.X[2, 2] <- delta

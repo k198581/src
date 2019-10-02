@@ -26,9 +26,9 @@ Backward <- function(O, params, E) {
   xy.m <- 1-epsilon-lambda-tau.XY
   
   # Initialization
-  b.M <- matrix(0, U+2, V+2)
-  b.X <- matrix(0, U+2, V+2)
-  b.Y <- matrix(0, U+2, V+2)
+  b.M <- matrix(0, U+1, V+1)
+  b.X <- matrix(0, U+1, V+1)
+  b.Y <- matrix(0, U+1, V+1)
   
   b.M[U, V] <- tau.M
   b.X[U, V] <- tau.XY
