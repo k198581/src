@@ -40,16 +40,17 @@ Forward <- function(O, params, E) {
       if ((i != 2) && (j != 2)) {
         f.M[i, j] <- p.xy[O1[i], O2[j]] * ((m.m) * f.M[i-1, j-1] + (xy.m) * (f.X[i-1, j-1] + f.Y[i-1, j-1]))
         f.X[i, j] <- q.x[1, O1[i]] * (delta * f.M[i-1, j] + epsilon * f.X[i-1, j] + lambda * f.Y[i-1, j])
-        f.Y[i, j] <- q.y[1, O2[j]] * (delta * f.M[i, j-1] + lambda * f.X[i, j-1] + epsilon * f.Y[i, j-1])
+        f.Y[i, j] <- q.y[1, O2[j]] * (delta * f.M[i, j-1] + epsilon * f.Y[i, j-1] + lambda * f.X[i, j-1])
       }
     }
   }
   
   # Termination
-  # Po <- tau.M * f.M[n, m] + tau.XY * (f.X[n, m] + f.Y[n, m])
+  Po <- tau.M * f.M[U, V] + tau.XY * (f.X[U, V] + f.Y[U, V])
   
   f.val <- list(f.M, f.X, f.Y)
   names(f.val) <- c(S)
   
-  return(f.val)
+  return(Po)
+  #return(f.val)
 }
