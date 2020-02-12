@@ -26,7 +26,7 @@ ProgressiveAlignment <- function(psa.list, seq.list, s, similarity=T) {
   for (k in 1:N) {
     i <- reg.comb[1, k]
     j <- reg.comb[2, k]
-    dist.mat[i, j] <- psa[[k]]$score
+    dist.mat[i, j] <- psa.list[[k]]$score
   }
   
   # Calculate the PSA of identical pairs.  
