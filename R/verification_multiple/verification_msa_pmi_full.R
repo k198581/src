@@ -47,10 +47,10 @@ while (1) {
     
     # Computes the MSA using the BestFirst method.
     print(paste("Start:", w["name"]))
-    msa.init <- ProgressiveAlignment(psa.list[[as.numeric(w["id"])]], seq.list, s, F)
-    i <- as.numeric(w["id"])
-    msa.list[[i]] <- list()
-    msa.list[[i]] <- BestFirst(msa.init, s, F)
+    id <- as.numeric(w["id"])
+    msa.init <- ProgressiveAlignment(psa.list[[id]], seq.list, s, F)
+    msa.list[[id]] <- list()
+    msa.list[[id]] <- BestFirst(msa.init, s, F)
     print(paste("End:", w["name"]))
   } 
   psa.list <- ChangeListMSA2PSA(msa.list, s)
