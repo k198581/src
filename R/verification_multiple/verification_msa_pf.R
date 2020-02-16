@@ -8,7 +8,6 @@ ansrate <- "ansrate_msa_pf"
 multiple <- "multiple_pf"
 
 list.words <- GetPathList()  # the list of words
-s <- MakeEditDistance(Inf)  # the scoring matrix
 
 for (pen in (-1)) {
   
@@ -22,7 +21,8 @@ for (pen in (-1)) {
   }
 
   # Make the list of the MSAs.
-  msa.list <- MSAforEachWord(list.words, s)
+  s <- MakeFeatureMatrix(-Inf, pen)
+  msa.list <- MSAforEachWord(list.words, s, similarity=T)
   # Calculate the accuracy of the MSAs.
   CalcAccMSA(msa.list, list.words, ansrate.file, output.dir)
   
