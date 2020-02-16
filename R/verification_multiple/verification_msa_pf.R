@@ -12,10 +12,10 @@ list.words <- GetPathList()  # the list of words
 for (pen in (-3)) {
   
   # matchingrate path
-  ansrate.file <- paste("../../Alignment/", ansrate, "_", pen, "_", format(Sys.Date()), ".txt", sep = "")
+  ansrate.file <- paste("../../Alignment/", ansrate, "_non-gap-op_", pen, "_", format(Sys.Date()), ".txt", sep = "")
   
   # result path
-  output.dir <- paste("../../Alignment/", multiple, "_", pen, "_", format(Sys.Date()), "/", sep = "")
+  output.dir <- paste("../../Alignment/", multiple, "_non-gap-op_", pen, "_", format(Sys.Date()), "/", sep = "")
   if (!dir.exists(output.dir)) {
     dir.create(output.dir)
   }
