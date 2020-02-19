@@ -11,10 +11,10 @@ file <- "ansrate_pf-pmi"
 dir <- "pairwise_pf-pmi"
 
 # Set the path of the matching rate.
-ansrate.file <- paste("../../Alignment/", file, "_", format(Sys.Date()), ".txt", sep = "")
+ansrate.file <- paste("../../Alignment/", file, "_gap-op-old_", format(Sys.Date()), ".txt", sep = "")
 
 # Set the path of the PSA directory.
-output.dir <- paste("../../Alignment/", dir, "_", format(Sys.Date()), "/", sep = "")
+output.dir <- paste("../../Alignment/", dir, "_gap-op-old_", format(Sys.Date()), "/", sep = "")
 if (!dir.exists(output.dir)) {
   dir.create(output.dir)
 }
