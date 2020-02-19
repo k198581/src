@@ -1,4 +1,4 @@
 library(doMC)
 
-cores <- detectCores()
+cores <- detectCores() / 2
 registerDoMC(cores)
