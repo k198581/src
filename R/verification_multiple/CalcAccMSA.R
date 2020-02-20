@@ -57,8 +57,8 @@ CalcAccMSA <- function(msa.list, list.words, ansrate.file, output.dir) {
     msa <- msa[order(msa[, 1]), ]
     
     # Unified the gap insertion.
-    msa       <- Convert(msa)
-    gold.mat  <- Convert(gold.mat)
+    #msa       <- Convert(msa)
+    #gold.mat  <- Convert(gold.mat)
     
     # Calculates the MSA accuracy.
     M <- dim(msa)[1]
