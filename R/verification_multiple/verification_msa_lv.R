@@ -8,10 +8,10 @@ ansrate <- "ansrate_msa_lv"
 multiple <- "multiple_lv"
 
 # matchingrate path
-ansrate.file <- paste("../../Alignment/", ansrate, "_", format(Sys.Date()), ".txt", sep = "")
+ansrate.file <- paste("../../Alignment/", ansrate, "_gap-op-old_", format(Sys.Date()), ".txt", sep = "")
 
 # result path
-output.dir <- paste("../../Alignment/", multiple, "_", format(Sys.Date()), "/", sep = "")
+output.dir <- paste("../../Alignment/", multiple, "_gap-op-old_", format(Sys.Date()), "/", sep = "")
 if (!dir.exists(output.dir)) {
   dir.create(output.dir)
 }
