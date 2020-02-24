@@ -7,24 +7,30 @@ source("psa/pairwise_pf-pmi.R")
 source("verification/VerificationPSA.R")
 source("parallel_config.R")
 
-file <- "ansrate_pf-pmi"
-dir <- "pairwise_pf-pmi"
-
-# Set the path of the matching rate.
-ansrate.file <- paste("../../Alignment/", file, "_", format(Sys.Date()), ".txt", sep = "")
-
-# Set the path of the PSA directory.
-output.dir <- paste("../../Alignment/", dir, "_", format(Sys.Date()), "/", sep = "")
-if (!dir.exists(output.dir)) {
-  dir.create(output.dir)
+VerificationPFPMI <- function(file, dir, ext=NULL) {
+  
+  # Set the path of the matching rate.
+  ansrate.file <- paste("../../Alignment/", file, "_", ext, "_", format(Sys.Date()), ".txt", sep = "")
+  
+  # Set the path of the PSA directory.
+  output.dir <- paste("../../Alignment/", dir, "_", ext, "_", format(Sys.Date()), "/", sep = "")
+  if (!dir.exists(output.dir)) {
+    dir.create(output.dir)
+  }
+  
+  # Update the scoring matrix with PMI.
+  list.words <- GetPathList()
+  s <- MakeEditDistance(Inf)
+  psa.list <- PSAforEachWord(list.words, s)
+  s <- PairwisePFPMI(psa.list, list.words, s)
+  #save(s, file=paste("scoring_matrix_pmi_", format(Sys.Date()), ".RData", sep=""))
+  
+  # Execute the PSA for each word.
+  VerificationPSA(ansrate.file, output.dir, s)
+  
 }
 
-# Update the scoring matrix with PMI.
-list.words <- GetPathList()
-s <- MakeEditDistance(Inf)
-psa.list <- PSAforEachWord(list.words, s)
-s <- PairwisePFPMI(psa.list, list.words, s)
-#save(s, file=paste("scoring_matrix_pmi_", format(Sys.Date()), ".RData", sep=""))
-
-# Execute the PSA for each word.
-VerificationPSA(ansrate.file, output.dir, s)
+file <- "ansrate_pf-pmi"
+dir <- "pairwise_pf-pmi"
+ext = commandArgs(trailingOnly=TRUE)[1]
+VerificationPFPMI(file, dir, ext)
