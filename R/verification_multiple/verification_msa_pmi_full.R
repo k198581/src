@@ -9,14 +9,14 @@ source("verification_multiple/change_list_msa2psa.R")
 source("verification_multiple/CalcAccMSA.R")
 source("parallel_config.R")
 
-ansrate <- "ansrate_msa"
-multiple <- "multiple"
+ansrate <- "ansrate_msa_pmi"
+multiple <- "multiple_pmi"
 
 # matchingrate path
-ansrate.file <- paste("../../Alignment/", ansrate, "_pmi_", format(Sys.Date()), ".txt", sep = "")
+ansrate.file <- paste("../../Alignment/", ansrate, "_", format(Sys.Date()), ".txt", sep = "")
 
 # result path
-output.dir <- paste("../../Alignment/", multiple, "_pmi_", format(Sys.Date()), "/", sep = "")
+output.dir <- paste("../../Alignment/", multiple, "_", format(Sys.Date()), "/", sep = "")
 if (!dir.exists(output.dir)) {
   dir.create(output.dir)
 }
