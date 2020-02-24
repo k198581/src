@@ -45,10 +45,10 @@ NeedlemanWunsch <- function(seq1, seq2, s, select.min=F)
         d[1] <- max(d1, d2, d3)
       }
       
-      if (d[1] == d1) {
-        d[2] <- 0 # (0,0)
-      } else if (d[1] == d2) {
+      if (d[1] == d2) {
         d[2] <- 1 # (0,1)
+      } else if (d[1] == d1) {
+        d[2] <- 0 # (0,0)
       } else if (d[1] == d3) {
         d[2] <- -1 # (-1,0)
       }
