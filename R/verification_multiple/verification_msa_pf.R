@@ -8,7 +8,7 @@ VerificationMSA <- function(ansrate, multiple, ext=NULL) {
   
   list.words <- GetPathList()  # the list of words
   
-  for (pen in (-1)) {
+  for (pen in (-3)) {
     
     # matchingrate path
     ansrate.file <- paste("../../Alignment/", ansrate, "_", ext, "_", pen, "_", format(Sys.Date()), ".txt", sep = "")
