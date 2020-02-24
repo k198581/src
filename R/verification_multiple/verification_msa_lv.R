@@ -4,7 +4,7 @@ source("lib/load_exec_align.R")
 source("verification_multiple/CalcAccMSA.R")
 source("parallel_config.R")
 
-VerificationMSALV <- function(ansrate, multiple, ext=NULL) {
+VerificationMSA <- function(ansrate, multiple, ext=NULL) {
 
   # matchingrate path
   ansrate.file <- paste("../../Alignment/", ansrate, "_", ext, "_", format(Sys.Date()), ".txt", sep = "")
