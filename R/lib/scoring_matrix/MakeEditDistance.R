@@ -1,4 +1,5 @@
-source("lib/load_phoneme.R")
+library(phoneme)
+data(phoneme)
 
 MakeEditDistance <- function(s5 = NA) {
   # Make the scoring matrix using the phoneme features.

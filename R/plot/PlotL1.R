@@ -1,4 +1,5 @@
-source("lib/load_phoneme.R")
+library(phoneme)
+data(phoneme)
 
 PlotL1 <- function(l1.mat, l2.mat, cv) {
   

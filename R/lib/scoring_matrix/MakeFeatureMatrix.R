@@ -1,4 +1,5 @@
-source("lib/load_phoneme.R")
+library(phoneme)
+data(phoneme)
 
 MakeFeatureMatrix <- function(s5=NA, p=NA) {
   # Make the scoring matrix using the phoneme features.

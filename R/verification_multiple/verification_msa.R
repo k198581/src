@@ -4,7 +4,8 @@ source("lib/load_exec_align.R")
 source("lib/load_verif_lib.R")
 source("verification_multiple/CalcAccMSA.R")
 source("parallel_config.R")
-source("lib/load_phoneme.R")
+library(phoneme)
+data(phoneme)
 
 ansrate <- "ansrate_msa_pf-pmi"
 multiple <- "multiple_pf-pmi"

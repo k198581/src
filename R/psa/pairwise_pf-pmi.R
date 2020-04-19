@@ -1,7 +1,8 @@
 library(gtools)
 library(MASS)
 
-source("lib/load_phoneme.R")
+library(phoneme)
+data(phoneme)
 
 sym2feat <- function(x, args) {
   return(args[x, ])

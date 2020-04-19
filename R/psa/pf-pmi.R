@@ -1,4 +1,5 @@
-source("lib/load_phoneme.R")
+library(phoneme)
+data(phoneme)
 
 sym2feat <- function(x, args) {
   return(args[[1]][x, args[[2]]])

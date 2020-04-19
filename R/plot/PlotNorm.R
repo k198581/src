@@ -1,4 +1,5 @@
-source("lib/load_phoneme.R")
+library(phoneme)
+data(phoneme)
 
 PlotNorm <- function(pmi.mat, cv) {
   

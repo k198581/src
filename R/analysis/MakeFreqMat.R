@@ -1,5 +1,6 @@
 source("lib/load_scoring_matrix.R")
-source("lib/load_phoneme.R")
+library(phoneme)
+data(phoneme)
 source("lib/load_data_processing.R")
 
 # Sub functions
