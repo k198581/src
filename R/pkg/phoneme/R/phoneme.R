@@ -24,4 +24,8 @@ CV <- c(C, V)
 CV.feat <- c(C.feat, V.feat)
 mat.CV.feat <- rbind(mat.C.feat, mat.V.feat)
 
-#usethis::use_data(C, V, CV.feat, mat.CV.feat, internal = T)
+if (0) {
+  usethis::use_data(C, C.feat, mat.C.feat,
+                    V, V.feat, mat.V.feat,
+                    CV, CV.feat, mat.CV.feat, internal = T)
+}
