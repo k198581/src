@@ -20,9 +20,9 @@ PFPMI <- function(f.xy, f.x, f.y, N1, N2, V1, V2, corpus.feat) {
   p.x  <- vector(length=5)
   p.y  <- vector(length=5)
   for (p in 1:5) {
-    p.xy[p] <- (f.xy[p] + 1) / (N1 + V1)  # probability of the co-occurrence frequency of xy
-    p.x[p]  <- (f.x[p] + 1) / (N2 + V2)  # probability of the occurrence frequency of x
-    p.y[p]  <- (f.y[p] + 1) / (N2 + V2)  # probability of the occurrence frequency of y
+    p.xy[p] <- (f.xy[p] + 1) / (N1 + V1[p])  # probability of the co-occurrence frequency of xy
+    p.x[p]  <- (f.x[p] + 1) / (N2 + V2[p])  # probability of the occurrence frequency of x
+    p.y[p]  <- (f.y[p] + 1) / (N2 + V2[p])  # probability of the occurrence frequency of y
   }
   
   pmi <- t(p.xy) %*% ginv(p.x %*% t(p.y))
@@ -93,8 +93,18 @@ CalcPFPMI <- function(psa.list, s, p) {
   
   N1 <- dim(corpus.feat)[2] / 5  # number of the aligned segments
   N2 <- N1 * 2  # number of segments in the aligned segments
-  V1 <- length(unique(paste(corpus.feat[1, ], corpus.feat[2, ])))  # number of symbol pairs types in the segment pairs
-  V2 <- length(unique(as.vector(corpus.feat)))  # number of symbol types in the segments
+
+  V1.all <- unique(paste(corpus.feat[1, ], corpus.feat[2, ]))
+  V2.all <- unique(as.vector(corpus.feat))
+  V.all <- unique(paste(corpus.feat[1, ], corpus.feat[2, ]))
+  V1 <- NULL
+  V2 <- NULL
+  for (p in 1:5) {
+    V1[p] <- length(c(grep(paste(p, "C", sep = ""), V1.all),
+                      grep(paste(p, "V", sep = ""), V1.all)))
+    V2[p] <- length(c(grep(paste(p, "C", sep = ""), V2.all),
+                      grep(paste(p, "V", sep = ""), V2.all)))
+  }
   
   pmi.list <- foreach(i = 1:seg.pair.num) %dopar% {
     
