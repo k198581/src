@@ -91,7 +91,7 @@ CalcPFPMI <- function(psa.list, s, p) {
     feat.freq.vec[x] <- sum(x == corpus.feat)
   }
   
-  N1 <- dim(corpus.feat)[2]  # number of the aligned segments
+  N1 <- dim(corpus.feat)[2] / 5  # number of the aligned segments
   N2 <- N1 * 2  # number of segments in the aligned segments
   V1 <- length(unique(paste(corpus.feat[1, ], corpus.feat[2, ])))  # number of symbol pairs types in the segment pairs
   V2 <- length(unique(as.vector(corpus.feat)))  # number of symbol types in the segments
