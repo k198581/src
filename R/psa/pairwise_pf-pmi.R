@@ -66,7 +66,9 @@ CalcPFPMI <- function(psa.list, s, p) {
   feat.vec <- unique(as.vector(corpus.feat))
   feat.num <- length(feat.vec)
   
-  seg.pair.mat <- t(combn(x=seg.vec, m=2))
+  seg.pair.mat <- combn(x=seg.vec, m=2)
+  seg.pair.mat <- cbind(seg.pair.mat, rbind(seg.vec, seg.vec))
+  seg.pair.mat <- t(seg.pair.mat)
   seg.pair.num <- dim(seg.pair.mat)[1]
   
   feat.pair.mat <- combn(x=feat.vec, m=2)
