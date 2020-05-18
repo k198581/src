@@ -91,8 +91,8 @@ UpdatePFPMI <- function(psa.list, s, p) {
   N2 <- N1 * 2  # number of features in the aligned faetures
   
   # Initialization for the Laplace smoothing
-  V1.all <- length(unique(paste(corpus.feat[1, ], corpus.feat[2, ])))  # number of segment pair types
-  V2.all <- length(unique(as.vector(corpus.feat)))  # number of symbol types
+  V1.all <- unique(paste(corpus.feat[1, ], corpus.feat[2, ]))  # number of segment pair types
+  V2.all <- unique(as.vector(corpus.feat))  # number of symbol types
   V1     <- NULL  # The number of feature pair types for each column.
   V2     <- NULL  # The number of feature types for each column.
   for (p in 1:5) {
