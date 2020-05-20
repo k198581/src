@@ -117,8 +117,8 @@ UpdatePFPMI <- function(psa.list, s, p) {
   # Invert the PF-PMI for all segment pairs.
   score.tmp <- foreach(i = 1:seg.pair.num, .combine = c) %dopar% {
     pmi <- pmi.list[[i]]$pmi
-    #-sum(abs(pmi))  # L1 norm
-    -sqrt(sum(pmi * pmi))  # L2 norm
+    -sum(abs(pmi))  # L1 norm
+    #-sqrt(sum(pmi * pmi))  # L2 norm
   }
   
   pmi <- list()
