@@ -33,22 +33,15 @@ ProgressiveAlignment <- function(word.list, s, similarity=T) {
   
   # Calculate the PSA of identical pairs.  
   if (similarity) {
-    for (i in 1:num.regions) {
-      dist.mat[i, i] <- NeedlemanWunsch(word.list[[i]], word.list[[i]], s, select.min=min)$score
-    }
+    dist.mat <- 1 / dist.mat
   }
   
   # Fill the distance matrix.
   dist.mat.tmp <- t(dist.mat)
   dist.mat[lower.tri(dist.mat)] <- dist.mat.tmp[lower.tri(dist.mat.tmp)]
-  
-  if (similarity) {
-    # Convert the similarity matrix to the "dist" object.
-    psa.d <- dist(dist.mat)
-  } else {
-    # Convert the distance matrix to the "dist" object.
-    psa.d <- as.dist(dist.mat)
-  }
+
+  # Convert the distance matrix to the "dist" object.
+  psa.d <- as.dist(dist.mat)
   
   # Make the guide tree.
   psa.hc <- hclust(psa.d, "average")
