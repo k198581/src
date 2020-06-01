@@ -30,10 +30,13 @@ ProgressiveAlignment <- function(word.list, s, similarity=T) {
     j <- reg.comb[2, k]
     dist.mat[i, j] <- psa[[k]]$score
   }
-  
+
   # Calculate the PSA of identical pairs.  
   if (similarity) {
-    dist.mat <- 1 / dist.mat
+    dist.mat <- -dist.mat
+    dist.max <- max(dist.mat[upper.tri(dist.mat)])
+    dist.min <- min(dist.mat[upper.tri(dist.mat)])
+    dist.mat[upper.tri(dist.mat)] <- (dist.mat[upper.tri(dist.mat)] - dist.min) / (dist.max - dist.min)
   }
   
   # Fill the distance matrix.
