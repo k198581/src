@@ -36,9 +36,13 @@ ProgressiveAlignment <- function(word.list, s, similarity=T) {
     dist.mat <- -dist.mat
     dist.max <- max(dist.mat[upper.tri(dist.mat)])
     dist.min <- min(dist.mat[upper.tri(dist.mat)])
-    dist.mat[upper.tri(dist.mat)] <- (dist.mat[upper.tri(dist.mat)] - dist.min) / (dist.max - dist.min)
+    if (dist.max == dist.min) {
+      dist.mat[is.nan(dist.mat)] <- 0
+    } else {
+      dist.mat[upper.tri(dist.mat)] <- (dist.mat[upper.tri(dist.mat)] - dist.min) / (dist.max - dist.min)
+    }
   }
-  
+    
   # Fill the distance matrix.
   dist.mat.tmp <- t(dist.mat)
   dist.mat[lower.tri(dist.mat)] <- dist.mat.tmp[lower.tri(dist.mat.tmp)]
