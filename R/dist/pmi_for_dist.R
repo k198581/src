@@ -68,7 +68,7 @@ PSAforEachConcept <- function(r1, r2, s) {
 PSAforEachResion <- function(all.list, s) {
   
   # Make the PSA list.
-  r <- t(combn(95, 2))
+  r <- t(combn(47, 2))
   N <- dim(r)[1]
   
   psa.list <- foreach (i = 1:N) %dopar% {
@@ -86,9 +86,27 @@ PSAforEachResion <- function(all.list, s) {
   psa.list
 }
 
+# Find for the PSA which is lowest score.
+find_the_lowest <- function(psa.list) {
+  M <- length(psa.list)
+  for (i in 1:M) {
+    N <- length(psa.list[[i]])
+    vec <- foreach (j = 1:N, .combine = "c") %dopar% {
+      psa.list[[i]][[j]]$score
+    }
+    psa.list[[i]] <- psa.list[[i]][which(vec == min(vec))]
+  }
+  psa.list
+}
+
 # Update the scoring matrix using the PMI.
 s <- MakeEditDistance(Inf)  # the initial scoring matrix
+cat("\n")
+print("Initial PSA")
 psa.list <- PSAforEachResion(all.list, s)  # the initial alignments
+print("Find the lowest")
+psa.list <- find_the_lowest(psa.list) 
+cat("\n")
 
 s.old <- s
 N <- length(s.old)
@@ -96,17 +114,27 @@ for (i in 1:N) {
   s.old[i] <- 0
 }
 # START OF LOOP
+i <- 0
 while(1) {
+  i <- i + 1
+  cat("\n")
+  print(paste("loop:", i))
   diff <- N - sum(s == s.old)
   if (diff == 0) break
   # Compute the new scoring matrix that is updated by the PMI-weighting.
+  print("Updating the PMI.")
   s.old <- s
   rlt.pmi <- UpdatePMI(psa.list, s)
   pmi.mat <- rlt.pmi$pmi.mat
   s <- rlt.pmi$s
   # Compute the new PSA using the new scoring matrix.
+  print("PSAforEachResion")
   psa.list <- PSAforEachResion(all.list, s)
+  print("find_the_lowest")
+  psa.list <- find_the_lowest(psa.list) 
 }
 
 save(pmi.mat, file = "pmi_mat.RData")
 save(s, file = "pmi_score.RData")
+
+print("Finished!!")

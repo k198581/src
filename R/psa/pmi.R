@@ -37,7 +37,6 @@ UpdatePMI <- function(psa.list, s) {
   #
   # Returns:
   #   s: The scoring matrix that was updated by the PMI-weighting.
-  cat("\n")
   print("Calculate PMI")
   
   corpus <- MakeCorpus(psa.list)

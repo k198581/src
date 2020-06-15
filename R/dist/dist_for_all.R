@@ -8,7 +8,7 @@ load("all_list.RData")
 
 dist_for_all <- function(method="lv") {
   
-  r.pairs <- t(combn(95, 2))
+  r.pairs <- t(combn(47, 2))
   N <- dim(r.pairs)[1]
   
   dist.list <- foreach (i = 1:N) %dopar% {
