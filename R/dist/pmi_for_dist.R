@@ -15,14 +15,20 @@ LD <- function(c1, c2, s) {
   N1 <- length(c1)
   N2 <- length(c2)
   
-  score.vec   <- NULL
-  psa.list <- list()
+  score.vec <- NULL
+  psa.list  <- list()
   k <- 1
   for (i in 1:N1) {
     for (j in 1:N2) {
-      psa           <- NeedlemanWunsch(c1[[i]], c2[[j]], s, select.min = T)
+      psa    <- NeedlemanWunsch(c1[[i]], c2[[j]], s, select.min = T)
+      as     <- psa$score
+      c1.len <- length(c1[[i]]) - 1
+      c2.len <- length(c2[[j]]) - 1
+      ldn    <- as / max(c1.len, c2.len)
+
+      psa$score     <- ldn
       psa.list[[k]] <- psa
-      score.vec     <- c(score.vec, psa$score)
+      score.vec     <- c(score.vec, ldn)
       
       k <- k + 1
     }
@@ -50,15 +56,17 @@ PSAforEachConcept <- function(r1, r2, s) {
   }
   N <- length(r1)
   
-  concepts <- names(r1)
-  psa.list <- list()
+  score.vec <- NULL
+  concepts  <- names(r1)
+  psa.list  <- list()
   k <- 1
   for (i in 1:N) {
     for (j in 1:N) {
+      psa           <- LD(r1[[i]], r2[[j]], s)
+      psa.list[[k]] <- psa
+      score.vec     <- c(score.vec, psa$score)
       
-      psa.list[[k]] <- LD(r1[[i]], r2[[j]], s)
       k <- k + 1
-      
     }
   }
   
@@ -104,8 +112,8 @@ s <- MakeEditDistance(Inf)  # the initial scoring matrix
 cat("\n")
 print("Initial PSA")
 psa.list <- PSAforEachResion(all.list, s)  # the initial alignments
-print("Find the lowest")
-psa.list <- find_the_lowest(psa.list) 
+#print("Find the lowest")
+#psa.list <- find_the_lowest(psa.list) 
 cat("\n")
 
 s.old <- s
@@ -130,8 +138,8 @@ while(1) {
   # Compute the new PSA using the new scoring matrix.
   print("PSAforEachResion")
   psa.list <- PSAforEachResion(all.list, s)
-  print("find_the_lowest")
-  psa.list <- find_the_lowest(psa.list) 
+  #print("find_the_lowest")
+  #psa.list <- find_the_lowest(psa.list) 
 }
 
 save(pmi.mat, file = "pmi_mat.RData")
