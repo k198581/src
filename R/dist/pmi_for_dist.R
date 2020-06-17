@@ -139,9 +139,8 @@ while(1) {
   psa.list <- PSAforEachResion(all.list, s)
   #print("find_the_lowest")
   #psa.list <- find_the_lowest(psa.list) 
+  save(pmi.mat, file = paste("pmi_mat_", i, ".RData", sep = ""))
+  save(s, file = paste("pmi_score_", i, ".RData", sep = ""))
 }
-
-save(pmi.mat, file = "pmi_mat.RData")
-save(s, file = "pmi_score.RData")
 
 print("Finished!!")
