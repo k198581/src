@@ -76,7 +76,7 @@ PSAforEachConcept <- function(r1, r2, s) {
 PSAforEachResion <- function(all.list, s) {
   
   # Make the PSA list.
-  r <- t(combn(2, 2))
+  r <- t(combn(95, 2))
   N <- dim(r)[1]
   
   psa.list <- foreach (i = 1:N) %dopar% {
