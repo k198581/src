@@ -33,7 +33,7 @@ LD <- function(c1, c2, s) {
       k <- k + 1
     }
   }
-  psa.list[[which(score.vec == min(score.vec))[1]]]
+  psa.list[which(score.vec == min(score.vec))[1]]
 }
 
 PSAforEachConcept <- function(r1, r2, s) {
@@ -62,14 +62,14 @@ PSAforEachConcept <- function(r1, r2, s) {
   k <- 1
   for (i in 1:N) {
     for (j in 1:N) {
-      psa           <- LD(r1[[i]], r2[[j]], s)
+      psa           <- unlist(LD(r1[[i]], r2[[j]], s), recursive = F)
       psa.list[[k]] <- psa
       score.vec     <- c(score.vec, psa$score)
       
       k <- k + 1
     }
   }
-  psa.list[[which(score.vec == min(score.vec))[1]]]
+  psa.list[which(score.vec == min(score.vec))[1]]
 }
 
 PSAforEachResion <- function(all.list, s) {
