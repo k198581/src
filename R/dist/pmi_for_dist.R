@@ -25,7 +25,7 @@ LD <- function(c1, c2, s) {
       c1.len <- length(c1[[i]]) - 1
       c2.len <- length(c2[[j]]) - 1
       ldn    <- as / max(c1.len, c2.len)
-
+      
       psa$score     <- ldn
       psa.list[[k]] <- psa
       score.vec     <- c(score.vec, ldn)
@@ -69,8 +69,7 @@ PSAforEachConcept <- function(r1, r2, s) {
       k <- k + 1
     }
   }
-  
-  psa.list
+  psa.list[[which(score.vec == min(score.vec))[1]]]
 }
 
 PSAforEachResion <- function(all.list, s) {
