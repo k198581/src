@@ -83,8 +83,9 @@ MakeMat <- function(r1, r2, method="lv") {
       c2 <- r2[[j]]
       
       psa           <- psa_for_each_form(c1, c2, method, s)
-      k             <- i + (j - 1) * N
-      psa.list[[k]] <- psa
+      if (i == j) {
+        psa.list[[i]] <- psa
+      }
       mat[i, j]     <- psa$asn
     }
   }
