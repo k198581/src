@@ -54,7 +54,7 @@ if (is.na(file)) {
   print(paste("File:", file))
   print(paste("Method:", method))
   dist.list <- dist_for_all(method)
-  save(dist.list, file = paste(file, ".RData", sep = ""))
+  save(dist.list, file = paste("dist_list_", file, ".RData", sep = ""))
 }
 
 print("Finished!!")
