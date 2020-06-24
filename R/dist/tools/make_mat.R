@@ -21,15 +21,16 @@ psa_for_each_form <- function(c1, c2, method, s) {
   
   psa.list <- list()
   asn.vec  <- NULL
+  k <- 0
   for (i in 1:N1) {
     for (j in 1:N2) {
       psa           <- NeedlemanWunsch(c1[[i]], c2[[j]], s, select.min = dist)
-      k             <- i + (j - 1) * N1
+      k             <- k + 1
       psa.list[[k]] <- psa
       
       as       <- psa$score
-      seq1.len <- length(psa$seq1) - 1
-      seq2.len <- length(psa$seq2) - 1
+      seq1.len <- length(c1[[i]]) - 1
+      seq2.len <- length(c2[[j]]) - 1
       
       asn      <- as / max(seq1.len, seq2.len)
       asn.vec  <- c(asn.vec, asn)
