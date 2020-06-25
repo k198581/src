@@ -77,6 +77,7 @@ MakeMat <- function(r1, r2, method="lv") {
   
   concepts <- names(r1)  
   psa.list <- list()
+  k <- 1
   mat <- matrix(NA, N, N, dimnames = list(concepts, concepts))
   for (i in 1:N) {
     for (j in 1:N) {
@@ -84,8 +85,9 @@ MakeMat <- function(r1, r2, method="lv") {
       c2 <- r2[[j]]
       
       psa           <- psa_for_each_form(c1, c2, method, s)
-      if (i == j) {
-        psa.list[[i]] <- psa
+      if (i != j) {
+        psa.list[[k]] <- psa
+        k <- k + 1
       }
       mat[i, j]     <- psa$asn
     }

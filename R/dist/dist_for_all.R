@@ -49,7 +49,7 @@ if (is.na(file)) {
   print(paste("File:", file))
   print(paste("Method:", method))
   psa.list <- dist_for_all(method)
-  save(psa.list, file = paste("dist_list_", file, ".RData", sep = ""))
+  save(psa.list, file = paste("psa_list_", file, ".RData", sep = ""))
 }
 
 print("Finished!!")
