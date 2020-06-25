@@ -11,7 +11,7 @@ dist_for_all <- function(method="lv") {
   r.pairs <- t(combn(95, 2))
   N <- dim(r.pairs)[1]
   
-  dist.list <- foreach (i = 1:N) %dopar% {
+  psa.list <- foreach (i = 1:N) %dopar% {
     
     k <- r.pairs[i, 1]
     l <- r.pairs[i, 2]
@@ -21,8 +21,6 @@ dist_for_all <- function(method="lv") {
     r2 <- all.list[[l]]
     
     mat.o  <- MakeMat(r1, r2, method)
-    nr.vec <- each_nr(mat.o$mat, dist = is.dist(method))
-    d      <- dist(nr.vec)
     
     dist        <- list()
     dist$method <- method
@@ -30,13 +28,10 @@ dist_for_all <- function(method="lv") {
     dist$pair   <- unlist(strsplit(dist$pair, " "))
     
     dist$psa.list <- mat.o$psa.list
-    dist$mat      <- mat.o$mat
-    dist$ranks    <- nr.vec
-    dist$dist     <- d
     return(dist)
   }
   
-  dist.list
+  psa.list
 }
 
 file   = commandArgs(trailingOnly=TRUE)[1]
@@ -53,8 +48,8 @@ if (is.na(file)) {
 } else {
   print(paste("File:", file))
   print(paste("Method:", method))
-  dist.list <- dist_for_all(method)
-  save(dist.list, file = paste("dist_list_", file, ".RData", sep = ""))
+  psa.list <- dist_for_all(method)
+  save(psa.list, file = paste("dist_list_", file, ".RData", sep = ""))
 }
 
 print("Finished!!")
